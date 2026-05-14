@@ -1,0 +1,11 @@
+country,state,treatment_available,treatment_methods,reuse_readiness
+United States,Ohio,Yes,Sand Filtration + Chlorination,Moderate
+United States,Texas,Yes,SBR + UV,Good
+India,Telangana,Limited,Sedimentation + Basic Filtration,Limited
+India,Maharashtra,Yes,SBR + MBBR,Moderate
+Singapore,Central Region,Yes,MBR + UV + Advanced Treatment,Advanced
+Australia,New South Wales,Yes,Recycling + UV + Filtration,Good
+Canada,Ontario,Yes,Sand Filtration + UV,Moderate
+Germany,Bavaria,Yes,Advanced Biological Treatment,Advanced
+Japan,Tokyo,Yes,MBR + Dual Reuse Systems,Advanced
+Brazil,Sao Paulo,Limited,Basic Municipal Treatment,Limited
