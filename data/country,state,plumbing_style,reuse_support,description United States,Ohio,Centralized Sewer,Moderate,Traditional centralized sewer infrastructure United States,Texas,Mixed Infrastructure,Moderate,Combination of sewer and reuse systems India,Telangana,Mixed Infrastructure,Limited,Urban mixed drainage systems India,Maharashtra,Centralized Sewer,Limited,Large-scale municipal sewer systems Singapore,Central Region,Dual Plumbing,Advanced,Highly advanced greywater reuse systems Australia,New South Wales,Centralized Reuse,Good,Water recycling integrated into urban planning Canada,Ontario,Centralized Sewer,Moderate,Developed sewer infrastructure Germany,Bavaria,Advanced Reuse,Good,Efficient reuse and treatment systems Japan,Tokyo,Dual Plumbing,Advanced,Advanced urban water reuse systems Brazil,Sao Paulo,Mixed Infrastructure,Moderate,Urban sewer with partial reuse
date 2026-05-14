@@ -1,0 +1,11 @@
+country,state,plumbing_style,reuse_support,description
+United States,Ohio,Centralized Sewer,Moderate,Traditional centralized sewer infrastructure
+United States,Texas,Mixed Infrastructure,Moderate,Combination of sewer and reuse systems
+India,Telangana,Mixed Infrastructure,Limited,Urban mixed drainage systems
+India,Maharashtra,Centralized Sewer,Limited,Large-scale municipal sewer systems
+Singapore,Central Region,Dual Plumbing,Advanced,Highly advanced greywater reuse systems
+Australia,New South Wales,Centralized Reuse,Good,Water recycling integrated into urban planning
+Canada,Ontario,Centralized Sewer,Moderate,Developed sewer infrastructure
+Germany,Bavaria,Advanced Reuse,Good,Efficient reuse and treatment systems
+Japan,Tokyo,Dual Plumbing,Advanced,Advanced urban water reuse systems
+Brazil,Sao Paulo,Mixed Infrastructure,Moderate,Urban sewer with partial reuse
