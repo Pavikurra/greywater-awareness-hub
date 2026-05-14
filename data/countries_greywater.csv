@@ -1,0 +1,11 @@
+country,state,population,greywater_tons_per_hour,greywater_m3_year
+United States,Ohio,11700000,250000,2190000000
+United States,Texas,31000000,540000,4730000000
+India,Telangana,39000000,900000,7880000000
+India,Maharashtra,124000000,2500000,21900000000
+Singapore,Central Region,5900000,180000,1570000000
+Australia,New South Wales,8400000,220000,1920000000
+Canada,Ontario,15000000,300000,2620000000
+Germany,Bavaria,13000000,280000,2450000000
+Japan,Tokyo,14000000,350000,3060000000
+Brazil,Sao Paulo,46000000,1000000,8760000000
