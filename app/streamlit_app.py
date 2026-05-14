@@ -49,193 +49,294 @@ df = df.merge(
 
 
 # ---------------------------------------------------
-# TITLE
+# SIDEBAR NAVIGATION
 # ---------------------------------------------------
 
-st.title("💧 Greywater Awareness Hub")
+st.sidebar.title("💧 Navigation")
 
-st.markdown("""
-### Creating awareness about global greywater production, reuse, and treatment systems.
-
-This platform helps users understand:
-- how much greywater is produced,
-- plumbing infrastructure differences,
-- treatment methods,
-- and safe reuse opportunities worldwide.
-""")
-
-
-# ---------------------------------------------------
-# MODULE CARDS
-# ---------------------------------------------------
-
-st.subheader("Explore Modules")
-
-col1, col2, col3, col4 = st.columns(4)
-
-with col1:
-    st.info("💧 Greywater Production")
-
-with col2:
-    st.info("🔧 Plumbing Styles")
-
-with col3:
-    st.info("⚙️ Treatment Systems")
-
-with col4:
-    st.info("ℹ️ Information Center")
-
-
-# ---------------------------------------------------
-# COUNTRY SELECTION
-# ---------------------------------------------------
-
-st.subheader("Select Country and State")
-
-selected_country = st.selectbox(
-    "Choose Country",
-    df["country"].unique()
-)
-
-filtered_country = df[
-    df["country"] == selected_country
-]
-
-selected_state = st.selectbox(
-    "Choose State/Region",
-    filtered_country["state"].unique()
-)
-
-selected_row = filtered_country[
-    filtered_country["state"] == selected_state
-].iloc[0]
-
-
-# ---------------------------------------------------
-# METRICS
-# ---------------------------------------------------
-
-st.subheader("Greywater Statistics")
-
-col1, col2, col3 = st.columns(3)
-
-col1.metric(
-    "Population",
-    f"{selected_row['population']:,}"
-)
-
-col2.metric(
-    "Greywater Tons/Hour",
-    f"{selected_row['greywater_tons_per_hour']:,}"
-)
-
-col3.metric(
-    "Greywater m³/Year",
-    f"{selected_row['greywater_m3_year']:,}"
+page = st.sidebar.radio(
+    "Select Module",
+    [
+        "Home",
+        "Greywater Production",
+        "Plumbing Styles",
+        "Treatment Systems",
+        "Information Center"
+    ]
 )
 
 
 # ---------------------------------------------------
-# PLUMBING STYLE
+# HOME PAGE
 # ---------------------------------------------------
 
-st.subheader("Plumbing Infrastructure")
+if page == "Home":
 
-st.success(
-    f"Plumbing Style: {selected_row['plumbing_style']}"
-)
+    st.title("💧 Greywater Awareness Hub")
 
-st.write(
-    f"Reuse Support Level: {selected_row['reuse_support']}"
-)
+    st.markdown("""
+    ### Creating awareness about global greywater production, reuse, and treatment systems.
 
-st.write(
-    f"Infrastructure Description: {selected_row['description']}"
-)
+    This platform helps users understand:
+    - greywater production,
+    - plumbing infrastructure,
+    - treatment systems,
+    - reuse opportunities,
+    - and sustainability awareness worldwide.
+    """)
 
+    st.subheader("Explore Modules")
 
-# ---------------------------------------------------
-# TREATMENT SYSTEMS
-# ---------------------------------------------------
+    col1, col2, col3, col4 = st.columns(4)
 
-st.subheader("Treatment Systems")
+    with col1:
+        st.info("💧 Greywater Production")
 
-st.write(
-    f"Treatment Available: {selected_row['treatment_available']}"
-)
+    with col2:
+        st.info("🔧 Plumbing Styles")
 
-st.write(
-    f"Treatment Methods: {selected_row['treatment_methods']}"
-)
+    with col3:
+        st.info("⚙️ Treatment Systems")
 
-st.write(
-    f"Reuse Readiness: {selected_row['reuse_readiness']}"
-)
+    with col4:
+        st.info("ℹ️ Information Center")
 
+    st.subheader("Global Overview")
 
-# ---------------------------------------------------
-# GREYWATER CHART
-# ---------------------------------------------------
+    col1, col2, col3 = st.columns(3)
 
-st.subheader("Greywater Production Comparison")
+    col1.metric(
+        "Countries/States",
+        len(df)
+    )
 
-fig = px.bar(
-    df,
-    x="country",
-    y="greywater_tons_per_hour",
-    color="country",
-    title="Greywater Tons Per Hour by Country"
-)
+    col2.metric(
+        "Total Greywater Tons/Hour",
+        f"{df['greywater_tons_per_hour'].sum():,.0f}"
+    )
 
-st.plotly_chart(
-    fig,
-    use_container_width=True
-)
+    col3.metric(
+        "Total Population",
+        f"{df['population'].sum():,}"
+    )
 
+    fig = px.bar(
+        df,
+        x="country",
+        y="greywater_tons_per_hour",
+        color="country",
+        title="Global Greywater Production"
+    )
 
-# ---------------------------------------------------
-# INFORMATION CENTER
-# ---------------------------------------------------
-
-st.subheader("What is Greywater?")
-
-st.write("""
-Greywater is wastewater generated from:
-- showers,
-- sinks,
-- laundry,
-- and household cleaning activities.
-
-It does NOT include toilet waste.
-
-Greywater can often be treated and reused for:
-- gardening,
-- toilet flushing,
-- irrigation,
-- and cleaning purposes.
-""")
+    st.plotly_chart(
+        fig,
+        use_container_width=True
+    )
 
 
 # ---------------------------------------------------
-# SAFE REUSE GUIDE
+# GREYWATER PAGE
 # ---------------------------------------------------
 
-st.subheader("Safe Greywater Reuse Options")
+elif page == "Greywater Production":
 
-st.write("""
-Common reuse options include:
-- garden irrigation,
-- toilet flushing,
-- car washing,
-- outdoor cleaning,
-- landscape watering.
+    st.title("💧 Greywater Production")
 
-Avoid direct reuse for:
-- drinking,
-- cooking,
-- bathing,
-- or food preparation without advanced treatment.
-""")
+    selected_country = st.selectbox(
+        "Choose Country",
+        df["country"].unique()
+    )
+
+    filtered_country = df[
+        df["country"] == selected_country
+    ]
+
+    selected_state = st.selectbox(
+        "Choose State/Region",
+        filtered_country["state"].unique()
+    )
+
+    selected_row = filtered_country[
+        filtered_country["state"] == selected_state
+    ].iloc[0]
+
+    st.subheader("Greywater Statistics")
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(
+        "Population",
+        f"{selected_row['population']:,}"
+    )
+
+    col2.metric(
+        "Greywater Tons/Hour",
+        f"{selected_row['greywater_tons_per_hour']:,}"
+    )
+
+    col3.metric(
+        "Greywater m³/Year",
+        f"{selected_row['greywater_m3_year']:,}"
+    )
+
+    st.subheader("Country Comparison")
+
+    fig = px.bar(
+        df,
+        x="country",
+        y="greywater_tons_per_hour",
+        color="country",
+        title="Greywater Production Comparison"
+    )
+
+    st.plotly_chart(
+        fig,
+        use_container_width=True
+    )
+
+
+# ---------------------------------------------------
+# PLUMBING PAGE
+# ---------------------------------------------------
+
+elif page == "Plumbing Styles":
+
+    st.title("🔧 Plumbing Styles")
+
+    selected_country = st.selectbox(
+        "Choose Country",
+        df["country"].unique(),
+        key="plumbing_country"
+    )
+
+    filtered_country = df[
+        df["country"] == selected_country
+    ]
+
+    selected_state = st.selectbox(
+        "Choose State/Region",
+        filtered_country["state"].unique(),
+        key="plumbing_state"
+    )
+
+    selected_row = filtered_country[
+        filtered_country["state"] == selected_state
+    ].iloc[0]
+
+    st.subheader("Infrastructure Information")
+
+    st.success(
+        f"Plumbing Style: {selected_row['plumbing_style']}"
+    )
+
+    st.write(
+        f"Reuse Support Level: {selected_row['reuse_support']}"
+    )
+
+    st.write(
+        f"Description: {selected_row['description']}"
+    )
+
+
+# ---------------------------------------------------
+# TREATMENT PAGE
+# ---------------------------------------------------
+
+elif page == "Treatment Systems":
+
+    st.title("⚙️ Treatment Systems")
+
+    selected_country = st.selectbox(
+        "Choose Country",
+        df["country"].unique(),
+        key="treatment_country"
+    )
+
+    filtered_country = df[
+        df["country"] == selected_country
+    ]
+
+    selected_state = st.selectbox(
+        "Choose State/Region",
+        filtered_country["state"].unique(),
+        key="treatment_state"
+    )
+
+    selected_row = filtered_country[
+        filtered_country["state"] == selected_state
+    ].iloc[0]
+
+    st.subheader("Treatment Information")
+
+    st.write(
+        f"Treatment Available: {selected_row['treatment_available']}"
+    )
+
+    st.write(
+        f"Treatment Methods: {selected_row['treatment_methods']}"
+    )
+
+    st.write(
+        f"Reuse Readiness: {selected_row['reuse_readiness']}"
+    )
+
+    st.subheader("Recommended Reuse Options")
+
+    st.info("""
+    Recommended reuse options:
+    - irrigation,
+    - toilet flushing,
+    - landscape watering,
+    - cleaning purposes.
+    """)
+
+
+# ---------------------------------------------------
+# INFORMATION PAGE
+# ---------------------------------------------------
+
+elif page == "Information Center":
+
+    st.title("ℹ️ Information Center")
+
+    with st.expander("What is Greywater?"):
+
+        st.write("""
+        Greywater is wastewater generated from:
+        - showers,
+        - sinks,
+        - laundry,
+        - and cleaning activities.
+        """)
+
+    with st.expander("Greywater vs Blackwater"):
+
+        st.write("""
+        Greywater does not include toilet waste.
+        Blackwater contains sewage and requires advanced treatment.
+        """)
+
+    with st.expander("Treatment Methods"):
+
+        st.write("""
+        Common treatment methods:
+        - filtration,
+        - chlorination,
+        - UV treatment,
+        - SBR,
+        - MBR,
+        - wetlands systems.
+        """)
+
+    with st.expander("Safe Reuse"):
+
+        st.write("""
+        Safe reuse includes:
+        - gardening,
+        - flushing,
+        - irrigation,
+        - outdoor cleaning.
+        """)
 
 
 # ---------------------------------------------------
